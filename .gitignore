@@ -1,0 +1,21 @@
+# Terraform state
+*.tfstate
+*.tfstate.*
+
+# Terraform runtime files
+**/.terraform/
+.terraform.lock.hcl
+
+# Variable files
+**/secrets.auto.tfvars
+**/*.auto.tfvars
+**/backend.hcl
+**/*.tfplan
+
+# Sensitive generated files
+**/kubeconfig
+**/talosconfig
+
+# IDE / OS files
+.idea/
+*.sops.yaml

@@ -1,0 +1,51 @@
+proxmox_endpoint = "https://pve.example.com:8006/"
+proxmox_node     = "pve"
+image_storage    = "local"
+disk_storage     = "local-lvm"
+
+network_bridge      = "vmbr0"
+network_gateway     = "10.0.40.1"
+network_prefix      = 24
+vlan_id             = 40
+network_dns_servers = ["10.0.40.1"]
+
+cluster = {
+  name          = "production"
+  talos_version = "1.12.2"
+  schematic_id  = "YOUR_SCHEMATIC_ID"
+}
+
+vm_tags = ["k8s", "production"]
+
+node_resources = {
+  cpu_cores   = 2
+  cpu_sockets = 2
+  cpu_type    = "host"
+  memory_mb   = 4096
+  disk_gb     = 40
+}
+
+nodes = {
+  "k8s-prod-control-1" = {
+    vm_id        = 40011
+    ip           = "10.0.40.11"
+    machine_type = "controlplane"
+  },
+  "k8s-prod-worker-1" = {
+    vm_id        = 40021
+    ip           = "10.0.40.21"
+    machine_type = "worker"
+  }
+}
+
+node_labels = {
+  "topology.kubernetes.io/region" = "pve"
+  "topology.kubernetes.io/zone"   = "pve"
+}
+
+github_org        = "your-org"
+github_repository = "your-repo"
+flux_git_path     = "clusters/production"
+flux_git_branch   = "main"
+
+vault_terraform_kv_path = "terraform/k8s-production"
