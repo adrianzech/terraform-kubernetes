@@ -1,6 +1,6 @@
 terraform {
   backend "s3" {
-    endpoint                    = "https://api.s3.ext.zech.co"
+    endpoint                    = "https://s3.zech.co"
     bucket                      = "terraform-state"
     region                      = "eu-central-1"
     use_path_style              = true
