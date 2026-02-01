@@ -6,7 +6,7 @@ resource "proxmox_virtual_environment_download_file" "talos_image" {
   file_name               = "talos-${var.cluster.name}-${var.cluster.talos_version}-nocloud-amd64.img"
   url                     = "https://factory.talos.dev/image/${var.cluster.schematic_id}/${var.cluster.talos_version}/nocloud-amd64.raw.gz"
   decompression_algorithm = "gz"
-  overwrite               = true
+  overwrite               = false
 }
 
 # Create Proxmox virtual machines for Kubernetes nodes
