@@ -127,43 +127,14 @@ variable "flux_git_branch" {
   default     = "main"
 }
 
-variable "vault_role_id" {
-  description = "Vault AppRole role_id used by the Vault provider."
+variable "proxmox_api_token" {
+  description = "Proxmox API token (from Infisical injection)."
   type        = string
   sensitive   = true
 }
 
-variable "vault_secret_id" {
-  description = "Vault AppRole secret_id used by the Vault provider."
+variable "github_token" {
+  description = "GitHub token used for Flux bootstrap (from Infisical injection)."
   type        = string
   sensitive   = true
-}
-
-variable "vault_terraform_kv_path" {
-  description = "Vault KV v2 path for Terraform secrets (e.g., terraform/k8s-development)."
-  type        = string
-}
-
-variable "vault_k8s_namespace" {
-  description = "Namespace used for Vault Kubernetes auth service account."
-  type        = string
-  default     = "vault"
-}
-
-variable "vault_k8s_token_policies" {
-  description = "Vault policies attached to tokens issued by the Kubernetes auth role."
-  type        = list(string)
-  default     = ["default"]
-}
-
-variable "vault_k8s_kv_mount" {
-  description = "KV v2 mount name used by Kubernetes workloads (e.g., secret)."
-  type        = string
-  default     = "kv"
-}
-
-variable "vault_k8s_secret_prefix" {
-  description = "Base prefix under the KV mount for cluster secrets."
-  type        = string
-  default     = "kubernetes"
 }

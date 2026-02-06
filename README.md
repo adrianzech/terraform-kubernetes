@@ -6,74 +6,62 @@ under `envs/development` and `envs/production`.
 ## Prerequisites
 
 - OpenTofu installed (`tofu`)
-- Access to Proxmox API and Vault
+- Access to Proxmox API and Infisical CLI (configured via `infisical init`)
 - `kubectl` and `talosctl` for config usage (optional but recommended)
 
-## Example files
 
-Copy the example files and fill in your values:
-```bash
-cp envs/development/backend.hcl.example envs/development/backend.hcl
-```
-```bash
-cp envs/development/vault.auto.tfvars.example envs/development/vault.auto.tfvars
-```
-```bash
-cp envs/development/terraform.tfvars.example envs/development/terraform.tfvars
-```
+## Infisical secrets
 
-Repeat for production:
-```bash
-cp envs/production/backend.hcl.example envs/production/backend.hcl
-```
-```bash
-cp envs/production/vault.auto.tfvars.example envs/production/vault.auto.tfvars
-```
-```bash
-cp envs/production/terraform.tfvars.example envs/production/terraform.tfvars
-```
+Secrets are injected via Infisical CLI. Name them as TF vars:
+- `TF_VAR_proxmox_api_token`
+- `TF_VAR_github_token`
+
+S3 backend auth):
+- `AWS_ACCESS_KEY_ID`
+- `AWS_SECRET_ACCESS_KEY`
+- `AWS_REGION`
 
 ## Init
 
 Use `-reconfigure` when switching between dev/prod backends.
 
-Development:
+Development (Infisical env slug `dev`):
 ```bash
-tofu init -backend-config=envs/development/backend.hcl
+infisical run --env=dev -- tofu init -backend-config=envs/development/backend.hcl
 ```
 
-Production:
+Production (Infisical env slug `prod`):
 ```bash
-tofu init -backend-config=envs/production/backend.hcl
+infisical run --env=prod -- tofu init -backend-config=envs/production/backend.hcl
 ```
 
 Switch dev -> prod (or prod -> dev):
 ```bash
-tofu init -reconfigure -backend-config=envs/production/backend.hcl
+infisical run --env=prod -- tofu init -reconfigure -backend-config=envs/production/backend.hcl
 ```
 
 ## Quick start
 
-Development:
+Development (Infisical env slug `dev`):
 ```bash
-tofu init -reconfigure -backend-config=envs/development/backend.hcl
+infisical run --env=dev -- tofu init -reconfigure -backend-config=envs/development/backend.hcl
 ```
 ```bash
-tofu plan -var-file=envs/development/terraform.tfvars -var-file=envs/development/vault.auto.tfvars
+infisical run --env=dev -- tofu plan -var-file=envs/development/terraform.tfvars
 ```
 ```bash
-tofu apply -var-file=envs/development/terraform.tfvars -var-file=envs/development/vault.auto.tfvars
+infisical run --env=dev -- tofu apply -var-file=envs/development/terraform.tfvars
 ```
 
-Production:
+Production (Infisical env slug `prod`):
 ```bash
-tofu init -reconfigure -backend-config=envs/production/backend.hcl
+infisical run --env=prod -- tofu init -reconfigure -backend-config=envs/production/backend.hcl
 ```
 ```bash
-tofu plan -var-file=envs/production/terraform.tfvars -var-file=envs/production/vault.auto.tfvars
+infisical run --env=prod -- tofu plan -var-file=envs/production/terraform.tfvars
 ```
 ```bash
-tofu apply -var-file=envs/production/terraform.tfvars -var-file=envs/production/vault.auto.tfvars
+infisical run --env=prod -- tofu apply -var-file=envs/production/terraform.tfvars
 ```
 
 Notes:
@@ -84,9 +72,9 @@ Notes:
 
 These outputs are produced from the currently initialized backend state.
 
-Development:
+Development (Infisical env slug `dev`):
 ```bash
-tofu init -reconfigure -backend-config=envs/development/backend.hcl
+infisical run --env=dev -- tofu init -reconfigure -backend-config=envs/development/backend.hcl
 ```
 ```bash
 tofu output -raw -no-color kubeconfig > ~/.kube/config-dev && chmod 600 ~/.kube/config-dev
@@ -95,9 +83,9 @@ tofu output -raw -no-color kubeconfig > ~/.kube/config-dev && chmod 600 ~/.kube/
 tofu output -raw -no-color talosconfig > ~/.talos/config-dev && chmod 600 ~/.talos/config-dev
 ```
 
-Production:
+Production (Infisical env slug `prod`):
 ```bash
-tofu init -reconfigure -backend-config=envs/production/backend.hcl
+infisical run --env=prod -- tofu init -reconfigure -backend-config=envs/production/backend.hcl
 ```
 ```bash
 tofu output -raw -no-color kubeconfig > ~/.kube/config-prod && chmod 600 ~/.kube/config-prod

@@ -1,7 +1,7 @@
 # Proxmox provider configuration
 provider "proxmox" {
   endpoint  = var.proxmox_endpoint
-  api_token = local.vault_secrets.proxmox_api_token
+  api_token = var.proxmox_api_token
   insecure  = true
 
   ssh {
@@ -31,7 +31,7 @@ provider "flux" {
     branch = var.flux_git_branch
     http = {
       username = "git"
-      password = local.vault_secrets.github_token
+      password = var.github_token
     }
   }
 }
@@ -39,5 +39,5 @@ provider "flux" {
 # GitHub provider configuration
 provider "github" {
   owner = var.github_org
-  token = local.vault_secrets.github_token
+  token = var.github_token
 }

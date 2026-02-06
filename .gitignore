@@ -8,13 +8,13 @@
 
 # Variable files
 **/secrets.auto.tfvars
-**/*.auto.tfvars
-**/backend.hcl
+**/*.auto.tfvars 
 **/*.tfplan
 
 # Sensitive generated files
 **/kubeconfig
 **/talosconfig
+.infisical.json
 
 # IDE / OS files
 .idea/

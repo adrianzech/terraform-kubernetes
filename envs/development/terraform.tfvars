@@ -73,6 +73,3 @@ github_org = "adrianzech"
 github_repository = "flux"
 flux_git_path = "clusters/development"
 flux_git_branch = "main"
-
-# Vault
-vault_terraform_kv_path = "terraform/k8s-development"
