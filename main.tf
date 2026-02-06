@@ -23,17 +23,3 @@ module "k8s_cluster" {
   node_resources = var.node_resources
 
 }
-
-resource "kubernetes_namespace_v1" "flux_system" {
-  metadata {
-    name = "flux-system"
-  }
-
-  depends_on = [module.k8s_cluster]
-}
-
-resource "flux_bootstrap_git" "this" {
-  path = var.flux_git_path
-
-  depends_on = [module.k8s_cluster, kubernetes_namespace_v1.flux_system]
-}

@@ -14,7 +14,6 @@ under `envs/development` and `envs/production`.
 
 Secrets are injected via Infisical CLI. Name them as TF vars:
 - `TF_VAR_proxmox_api_token`
-- `TF_VAR_github_token`
 
 S3 backend auth):
 - `AWS_ACCESS_KEY_ID`

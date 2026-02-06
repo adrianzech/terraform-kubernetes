@@ -104,37 +104,8 @@ variable "node_resources" {
   }
 }
 
-# Flux Configuration
-
-variable "github_org" {
-  description = "GitHub organization"
-  type        = string
-}
-
-variable "github_repository" {
-  description = "GitHub repository"
-  type        = string
-}
-
-variable "flux_git_path" {
-  description = "Git path for Flux sync (e.g., clusters/production)."
-  type        = string
-}
-
-variable "flux_git_branch" {
-  description = "Git branch for Flux bootstrap."
-  type        = string
-  default     = "main"
-}
-
 variable "proxmox_api_token" {
   description = "Proxmox API token (from Infisical injection)."
-  type        = string
-  sensitive   = true
-}
-
-variable "github_token" {
-  description = "GitHub token used for Flux bootstrap (from Infisical injection)."
   type        = string
   sensitive   = true
 }

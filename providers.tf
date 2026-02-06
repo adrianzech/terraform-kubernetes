@@ -17,27 +17,3 @@ provider "kubernetes" {
   client_key = base64decode(module.k8s_cluster.kubeconfig_details.client_key)
   client_certificate = base64decode(module.k8s_cluster.kubeconfig_details.client_certificate)
 }
-
-# Flux provider configuration
-provider "flux" {
-  kubernetes = {
-    host = module.k8s_cluster.kubeconfig_details.host
-    cluster_ca_certificate = base64decode(module.k8s_cluster.kubeconfig_details.cluster_ca_certificate)
-    client_key = base64decode(module.k8s_cluster.kubeconfig_details.client_key)
-    client_certificate = base64decode(module.k8s_cluster.kubeconfig_details.client_certificate)
-  }
-  git = {
-    url = "https://github.com/${var.github_org}/${var.github_repository}.git"
-    branch = var.flux_git_branch
-    http = {
-      username = "git"
-      password = var.github_token
-    }
-  }
-}
-
-# GitHub provider configuration
-provider "github" {
-  owner = var.github_org
-  token = var.github_token
-}

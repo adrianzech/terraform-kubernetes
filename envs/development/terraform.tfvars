@@ -67,9 +67,3 @@ node_labels = {
   "topology.kubernetes.io/region" = "pve"
   "topology.kubernetes.io/zone"   = "pve"
 }
-
-# GitHub & Flux
-github_org = "adrianzech"
-github_repository = "flux"
-flux_git_path = "clusters/development"
-flux_git_branch = "main"
