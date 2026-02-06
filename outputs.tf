@@ -23,3 +23,15 @@ output "worker_ips" {
   description = "IP addresses of the worker nodes in the cluster."
   value       = module.k8s_cluster.worker_ips
 }
+
+output "infisical_token_reviewer_token" {
+  description = "Token for the infisical-token-reviewer service account (Kubernetes TokenRequest)."
+  value       = kubernetes_token_request_v1.infisical_token_reviewer.token
+  sensitive   = true
+}
+
+output "kubernetes_ca_certificate" {
+  description = "Kubernetes cluster CA certificate (decoded PEM)."
+  value       = base64decode(module.k8s_cluster.kubeconfig_details.cluster_ca_certificate)
+  sensitive   = true
+}
