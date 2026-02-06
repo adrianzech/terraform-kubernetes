@@ -76,10 +76,10 @@ Development (Infisical env slug `dev`):
 infisical run --env=dev -- tofu init -reconfigure -backend-config=envs/development/backend.hcl
 ```
 ```bash
-tofu output -raw -no-color kubeconfig > ~/.kube/config-dev && chmod 600 ~/.kube/config-dev
+infisical run --env=dev -- tofu output -raw -no-color kubeconfig > ~/.kube/config-dev && chmod 600 ~/.kube/config-dev
 ```
 ```bash
-tofu output -raw -no-color talosconfig > ~/.talos/config-dev && chmod 600 ~/.talos/config-dev
+infisical run --env=dev -- tofu output -raw -no-color talosconfig > ~/.talos/config-dev && chmod 600 ~/.talos/config-dev
 ```
 
 Production (Infisical env slug `prod`):
@@ -87,10 +87,10 @@ Production (Infisical env slug `prod`):
 infisical run --env=prod -- tofu init -reconfigure -backend-config=envs/production/backend.hcl
 ```
 ```bash
-tofu output -raw -no-color kubeconfig > ~/.kube/config-prod && chmod 600 ~/.kube/config-prod
+infisical run --env=prod -- tofu output -raw -no-color kubeconfig > ~/.kube/config-prod && chmod 600 ~/.kube/config-prod
 ```
 ```bash
-tofu output -raw -no-color talosconfig > ~/.talos/config-prod && chmod 600 ~/.talos/config-prod
+infisical run --env=prod -- tofu output -raw -no-color talosconfig > ~/.talos/config-prod && chmod 600 ~/.talos/config-prod
 ```
 
 ## Keep both clusters available without re-exporting
@@ -99,7 +99,7 @@ tofu output -raw -no-color talosconfig > ~/.talos/config-prod && chmod 600 ~/.ta
 
 Merge both kubeconfigs into the default location:
 ```bash
-KUBECONFIG=~/.kube/config-dev:~/.kube/config-prod kubectl config view --merge --flatten > ~/.kube/config
+KUBECONFIG=$HOME/.kube/config-dev:$HOME/.kube/config-prod kubectl config view --merge --flatten > $HOME/.kube/config
 ```
 ```bash
 chmod 600 ~/.kube/config
