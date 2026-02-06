@@ -20,6 +20,8 @@ cluster = {
   schematic_id  = "88d1f7a5c4f1d3aba7df787c448c1d3d008ed29cfb34af53fa0df4336a56040b"
 }
 
+cluster_endpoint = "k8s-dev-api.local.zech.co"
+
 vm_tags = ["k8s", "development"]
 
 node_resources = {
