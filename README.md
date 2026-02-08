@@ -8,7 +8,7 @@ This repository manages Kubernetes clusters via a single root stack with environ
 - OpenTofu (`tofu`)
 - Proxmox API access
 - Infisical CLI configured (`infisical init`)
-- `kubectl` and `talosctl` (optional but recommended)
+- `kubectl` and `talosctl`
 
 ## Infisical Secrets
 
@@ -34,9 +34,16 @@ Production:
 infisical run --env=prod -- tofu init -backend-config=envs/production/backend.hcl
 ```
 
-Switch dev -> prod (or prod -> dev):
+## Switch backends
+
+Switch dev -> prod:
 ```bash
 infisical run --env=prod -- tofu init -reconfigure -backend-config=envs/production/backend.hcl
+```
+
+Switch prod -> dev:
+```bash
+infisical run --env=dev -- tofu init -reconfigure -backend-config=envs/development/backend.hcl
 ```
 
 ## Plan and Apply
@@ -79,6 +86,9 @@ infisical run --env=dev -- tofu init -reconfigure -backend-config=envs/developme
 ```bash
 infisical run --env=dev -- tofu output -raw -no-color infisical_token_reviewer_token
 ```
+```bash
+infisical run --env=dev -- tofu output -raw -no-color kubernetes_ca_certificate
+```
 
 Production:
 ```bash
@@ -87,6 +97,9 @@ infisical run --env=prod -- tofu init -reconfigure -backend-config=envs/producti
 ```bash
 infisical run --env=prod -- tofu output -raw -no-color infisical_token_reviewer_token
 ```
+```bash
+infisical run --env=rpod -- tofu output -raw -no-color kubernetes_ca_certificate
+```
 
 Infisical configuration:
 - Kubernetes Host / Base Kubernetes API URL (dev): `https://k8s-dev-api.local.zech.co:6443`
@@ -94,11 +107,7 @@ Infisical configuration:
 - Token Reviewer JWT: token from `infisical-token-reviewer`
 - Allowed Namespaces: `infisical`
 - Allowed Service Account Names: `infisical-service-account`
-
-Advanced > CA Certificate (from OpenTofu output):
-```bash
-infisical run --env=dev -- tofu output -raw -no-color kubernetes_ca_certificate
-```
+- Advanced > CA Certificate: from OpenTofu output
 
 ## Export kubeconfig and talosconfig
 
