@@ -16,7 +16,7 @@ network_dns_servers = ["10.0.30.1"]
 # Talos Cluster Configuration
 cluster = {
   name          = "development"
-  talos_version = "1.12.2"
+  talos_version = "1.12.3"
   schematic_id  = "88d1f7a5c4f1d3aba7df787c448c1d3d008ed29cfb34af53fa0df4336a56040b"
 }
 
