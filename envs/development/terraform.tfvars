@@ -4,13 +4,13 @@ proxmox_endpoint = "https://pve.local.zech.co:8006/"
 # Proxmox Environment
 proxmox_node  = "pve"
 image_storage = "local"
-disk_storage = "local-lvm"
+disk_storage  = "local-lvm"
 
 # Network Configuration
-network_bridge  = "vmbr0"
-network_gateway = "10.0.30.1"
-network_prefix  = 24
-vlan_id = 30
+network_bridge      = "vmbr0"
+network_gateway     = "10.0.30.1"
+network_prefix      = 24
+vlan_id             = 30
 network_dns_servers = ["10.0.30.1"]
 
 # Talos Cluster Configuration

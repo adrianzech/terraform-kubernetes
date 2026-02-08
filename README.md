@@ -98,13 +98,13 @@ infisical run --env=prod -- tofu init -reconfigure -backend-config=envs/producti
 infisical run --env=prod -- tofu output -raw -no-color infisical_token_reviewer_token
 ```
 ```bash
-infisical run --env=rpod -- tofu output -raw -no-color kubernetes_ca_certificate
+infisical run --env=prod -- tofu output -raw -no-color kubernetes_ca_certificate
 ```
 
 Infisical configuration:
 - Kubernetes Host / Base Kubernetes API URL (dev): `https://k8s-dev-api.local.zech.co:6443`
 - Kubernetes Host / Base Kubernetes API URL (prod): `https://k8s-prod-api.local.zech.co:6443`
-- Token Reviewer JWT: token from `infisical-token-reviewer`
+- Token Reviewer JWT: token from `infisical-token-reviewer` (long-lived SA token Secret; does not expire like TokenRequest)
 - Allowed Namespaces: `infisical`
 - Allowed Service Account Names: `infisical-service-account`
 - Advanced > CA Certificate: from OpenTofu output

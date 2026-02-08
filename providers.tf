@@ -12,8 +12,8 @@ provider "proxmox" {
 
 # Kubernetes provider configuration
 provider "kubernetes" {
-  host = module.k8s_cluster.kubeconfig_details.host
+  host                   = module.k8s_cluster.kubeconfig_details.host
   cluster_ca_certificate = base64decode(module.k8s_cluster.kubeconfig_details.cluster_ca_certificate)
-  client_key = base64decode(module.k8s_cluster.kubeconfig_details.client_key)
-  client_certificate = base64decode(module.k8s_cluster.kubeconfig_details.client_certificate)
+  client_key             = base64decode(module.k8s_cluster.kubeconfig_details.client_key)
+  client_certificate     = base64decode(module.k8s_cluster.kubeconfig_details.client_certificate)
 }

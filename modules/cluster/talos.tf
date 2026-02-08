@@ -61,7 +61,7 @@ data "talos_cluster_health" "health" {
   client_configuration = talos_machine_secrets.machine_secrets.client_configuration
   control_plane_nodes  = local.control_plane_ips
   worker_nodes         = local.worker_ips
-  endpoints = [local.control_plane_endpoint]
+  endpoints            = [local.control_plane_endpoint]
 
   timeouts = {
     read = "10m"
@@ -74,7 +74,7 @@ data "talos_client_configuration" "talosconfig" {
 
   cluster_name         = var.cluster.name
   client_configuration = talos_machine_secrets.machine_secrets.client_configuration
-  endpoints = [local.control_plane_endpoint]
+  endpoints            = [local.control_plane_endpoint]
 }
 
 # Generate the Kubeconfig for Kubernetes cluster access

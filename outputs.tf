@@ -25,8 +25,8 @@ output "worker_ips" {
 }
 
 output "infisical_token_reviewer_token" {
-  description = "Token for the infisical-token-reviewer service account (Kubernetes TokenRequest)."
-  value       = kubernetes_token_request_v1.infisical_token_reviewer.token
+  description = "Long-lived token for the infisical-token-reviewer service account (service-account-token Secret)."
+  value       = local.infisical_token_reviewer_token
   sensitive   = true
 }
 

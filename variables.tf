@@ -39,9 +39,9 @@ variable "network_prefix" {
 }
 
 variable "network_dns_servers" {
-  type = list(string)
+  type        = list(string)
   description = "A list of DNS servers for the Talos nodes to use for upstream name resolution."
-  default = ["10.0.20.1"]
+  default     = ["10.0.20.1"]
 }
 
 variable "vlan_id" {

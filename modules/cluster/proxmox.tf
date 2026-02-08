@@ -21,7 +21,7 @@ resource "proxmox_virtual_environment_vm" "k8s_nodes" {
   node_name = var.proxmox_node
   started   = true
   on_boot   = true
-  tags        = var.vm_tags
+  tags      = var.vm_tags
 
   boot_order = ["virtio0"]
 
